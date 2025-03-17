@@ -71,6 +71,17 @@ class Utils {
     );
   }
 
+  static String checkAndUnescape(String text) {
+    // 尝试解码，如果解码前后一致，则认为不是已转义的文本
+    String decodedText = Uri.decodeComponent(text);
+    debugPrint('Decoded text: $decodedText, Original text: $text');
+    if (decodedText == text) {
+      return text; // 不是已转义的文本
+    } else {
+      return decodedText; // 已转义的文本，返回反转义后的文本
+    }
+  }
+
   static bool isSupportWebview() {
     return Platform.isAndroid ||
         Platform.isIOS ||

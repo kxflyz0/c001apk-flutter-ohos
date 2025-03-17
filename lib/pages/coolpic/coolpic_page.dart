@@ -1,3 +1,4 @@
+import 'package:c001apk_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +15,7 @@ class CoolpicPage extends StatefulWidget {
 
 class _CoolpicPageState extends State<CoolpicPage>
     with TickerProviderStateMixin {
-  String _title = Get.parameters['title'] ?? '';
+  String _title = Utils.checkAndUnescape(Get.parameters['title'] ?? '');
 
   late final TabController _tabController =
       TabController(vsync: this, length: 3);
