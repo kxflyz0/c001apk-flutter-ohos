@@ -1,14 +1,11 @@
 import 'dart:async';
-import 'dart:io';
 
-import 'package:android_intent_plus/android_intent.dart';
-import 'package:android_intent_plus/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../pages/home/return_top_controller.dart';
 import '../../pages/home/home_page.dart';
+import '../../pages/home/return_top_controller.dart';
 import '../../pages/main/main_controller.dart';
 import '../../pages/message/message_page.dart';
 import '../../pages/settings/settings_page.dart';
@@ -47,16 +44,7 @@ class _MainPageState extends State<MainPage> {
     if (_selectedIndex != 0) {
       onDestinationSelected(0);
     } else {
-      if (Platform.isAndroid) {
-        AndroidIntent intent = const AndroidIntent(
-          action: 'android.intent.action.MAIN',
-          flags: [Flag.FLAG_ACTIVITY_NEW_TASK],
-          category: 'android.intent.category.HOME',
-        );
-        await intent.launch();
-      } else {
         SystemNavigator.pop();
-      }
     }
   }
 
@@ -106,7 +94,7 @@ class _MainPageState extends State<MainPage> {
 
     return PopScope(
       canPop: false,
-      onPopInvokedWithResult: (_, obj) async {
+      onPopInvoked: (_) async {
         onBackPressed();
       },
       child: LayoutBuilder(

@@ -1,12 +1,10 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:saver_gallery/saver_gallery.dart';
 
 /// From Pilipala
 class DownloadUtils {
@@ -78,32 +76,35 @@ class DownloadUtils {
           return;
         }
       } else {
-        if (!await requestPhotoPer()) {
-          return;
+        if (!Platform.isOhos) {
+          if (!await requestPhotoPer()) {
+            return;
+          }
         }
       }
       SmartDialog.showLoading(msg: '保存中');
-      Dio dio = Dio();
       for (int index = 0; index < urlList.length; index++) {
-        final Response response = await dio.get(urlList[index],
-            options: Options(responseType: ResponseType.bytes));
-        final String picName = urlList[index].split('/').last;
-        final SaveResult result = await SaverGallery.saveImage(
-          Uint8List.fromList(response.data),
-          name: picName,
-          androidRelativePath: "Pictures/c001apk-flutter",
-          androidExistNotSave: true,
-        );
-        if (result.errorMessage != null) {
-          SmartDialog.dismiss();
-          SmartDialog.showToast('${index + 1}: ${result.errorMessage}');
-        }
-        if (index == urlList.length - 1) {
-          SmartDialog.dismiss();
-          if (result.isSuccess) {
-            SmartDialog.showToast('已保存');
+        GallerySaver.saveImage(urlList[index],
+                albumName: "Pictures/c001apk-flutter")
+            .then((bool? success) {
+          if (success != null && !success) {
+            SmartDialog.dismiss();
+            SmartDialog.showToast(
+                '${index + 1}/${urlList.length}: save failed, code $success');
           }
-        }
+          if (index == urlList.length - 1) {
+            SmartDialog.dismiss();
+            if (success != null && !success) {
+              SmartDialog.showToast('已保存');
+            }
+          }
+        });
+        // final SaveResult result = await SaverGallery.saveImage(
+        //   Uint8List.fromList(response.data),
+        //   name: picName,
+        //   androidRelativePath: "Pictures/c001apk-flutter",
+        //   androidExistNotSave: true,
+        // );
       }
     } catch (err) {
       SmartDialog.dismiss();

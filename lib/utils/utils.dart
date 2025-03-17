@@ -1,18 +1,18 @@
+import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
+import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import "package:flutter/foundation.dart";
 import 'package:flutter/services.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
+import 'package:html/dom.dart' as dom;
+import 'package:html/parser.dart' as html_parser;
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'dart:convert';
-import 'dart:math';
-import 'package:crypto/crypto.dart';
-import 'package:html/parser.dart' as html_parser;
-import 'package:html/dom.dart' as dom;
 
 import '../constants/constants.dart';
 import '../logic/network/network_repo.dart';
@@ -72,7 +72,10 @@ class Utils {
   }
 
   static bool isSupportWebview() {
-    return Platform.isAndroid || Platform.isIOS || Platform.isMacOS;
+    return Platform.isAndroid ||
+        Platform.isIOS ||
+        Platform.isOhos ||
+        Platform.isMacOS;
   }
 
   static Future<void> onShareImg(String url) async {
@@ -167,6 +170,7 @@ class Utils {
       return;
     }
     String path = url;
+    debugPrint("on open link, url: $url, path: $path");
     if (needConvert) {
       if (url.startsWith(Constants.PREFIX_COOLMARKET)) {
         path = url.replaceFirst(Constants.PREFIX_COOLMARKET, '/');

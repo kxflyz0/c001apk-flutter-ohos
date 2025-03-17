@@ -162,7 +162,7 @@ class ApiInterceptor extends Interceptor {
 
   static Future<String> checkConnect() async {
     final List<ConnectivityResult> connectivityResult =
-        await Connectivity().checkConnectivity();
+        await Connectivity().checkConnectivity().then((value) => [value]);
     if (connectivityResult.contains(ConnectivityResult.mobile)) {
       return '正在使用移动流量';
     } else if (connectivityResult.contains(ConnectivityResult.wifi)) {

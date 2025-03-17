@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-import '../../../logic/network/network_repo.dart';
 import '../../../logic/model/feed/datum.dart';
+import '../../../logic/network/network_repo.dart';
 import '../../../logic/state/loading_state.dart';
 import '../../../pages/home/home_page.dart' show TabType;
 
@@ -14,7 +14,7 @@ class HomeTopicController extends GetxController with StateMixin<List<Datum>> {
   late RxInt currentIndex = (tabType == TabType.TOPIC ? 1 : 0).obs;
 
   void onReload() {
-    change(null, status: RxStatus.loading());
+    change(GetStatus.loading());
     getData();
   }
 
@@ -25,11 +25,11 @@ class HomeTopicController extends GetxController with StateMixin<List<Datum>> {
             : '/v6/product/categoryList');
     switch (response) {
       case Empty():
-        change(null, status: RxStatus.empty());
+        change(GetStatus.empty());
       case Error():
-        change(null, status: RxStatus.error(response.errMsg));
+        change(GetStatus.error(response.errMsg));
       case Success():
-        change(response.response, status: RxStatus.success());
+        change(GetStatus.success(response.response));
     }
   }
 

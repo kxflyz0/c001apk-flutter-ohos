@@ -123,12 +123,12 @@ class _SettingsPageState extends State<SettingsPage>
             forceAppUpdate: true,
           ),
           DropDownMenuItem(
+            enabled: !GStorage.useMaterial,
             icon: Icons.format_color_fill,
             title: 'Theme Color',
             boxKey: SettingsBoxKey.staticColor,
             items: Constants.themeType
                 .map((type) => DropdownMenuItem<int>(
-                      enabled: !GStorage.useMaterial,
                       value: Constants.themeType.indexOf(type),
                       child: Text(type),
                     ))

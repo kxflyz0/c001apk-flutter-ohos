@@ -1,0 +1,20 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "connectivity_plus": "file:../har/connectivity_plus.har",
+    "device_info_plus": "file:../har/device_info_plus.har",
+    "package_info_plus": "file:../har/package_info_plus.har",
+    "share_plus": "file:../har/share_plus.har",
+    "flutter_inappwebview_ohos": "file:../har/flutter_inappwebview_ohos.har",
+    "image_picker_ohos": "file:../har/image_picker_ohos.har",
+    "path_provider_ohos": "file:../har/path_provider_ohos.har",
+    "url_launcher_ohos": "file:../har/url_launcher_ohos.har",
+    "permission_handler_ohos": "file:../har/permission_handler_ohos.har",
+    "gallery_saver": "file:../har/gallery_saver.har"
+  }
+}

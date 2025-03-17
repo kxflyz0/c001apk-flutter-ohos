@@ -88,6 +88,7 @@ class C001APKAPP extends StatelessWidget {
       }
 
       return GetMaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'c001apk',
         theme: ThemeData(
           colorScheme: selectedTheme == 2 ? darkColorScheme : lightColorScheme,

@@ -6,6 +6,7 @@ import '../../utils/storage_util.dart';
 class DropDownMenuItem extends StatefulWidget {
   const DropDownMenuItem({
     super.key,
+    this.enabled = true,
     required this.icon,
     required this.title,
     required this.boxKey,
@@ -13,6 +14,7 @@ class DropDownMenuItem extends StatefulWidget {
     this.forceAppUpdate = false,
   });
 
+  final bool enabled;
   final IconData icon;
   final String title;
   final String boxKey;
@@ -35,6 +37,7 @@ class _DropDownMenuItemState extends State<DropDownMenuItem> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      enabled: widget.enabled,
       leading: Icon(widget.icon),
       title: Text(widget.title),
       trailing: DropdownButton<int>(

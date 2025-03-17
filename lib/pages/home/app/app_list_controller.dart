@@ -8,7 +8,7 @@ class AppListController extends GetxController with StateMixin<List<AppInfo>> {
 
   Future<void> onReload([bool isRefresh = false]) async {
     if (!isRefresh) {
-      change(null, status: RxStatus.loading());
+      change(GetStatus.loading());
     }
     await _getInstalledApps();
   }
@@ -19,12 +19,12 @@ class AppListController extends GetxController with StateMixin<List<AppInfo>> {
           await platform.invokeMethod('getInstalledApps');
       List<AppInfo> parseList = AppInfo.parseList(installedApps);
       if (parseList.isNotEmpty) {
-        change(parseList, status: RxStatus.success());
+        change(GetStatus.success(parseList));
       } else {
-        change(null, status: RxStatus.empty());
+        change(GetStatus.empty());
       }
     } on PlatformException catch (e) {
-      change(null, status: RxStatus.error(e.message));
+      change(GetStatus.error(e));
       return;
     }
   }

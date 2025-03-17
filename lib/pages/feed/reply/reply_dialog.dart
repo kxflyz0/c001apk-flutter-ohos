@@ -434,7 +434,7 @@ class _ReplyDialogState extends State<ReplyDialog> with WidgetsBindingObserver {
                   icon: const Icon(Icons.image, size: 22),
                   onPressed: () async {
                     List<XFile> pickedFiles = await _imagePicker.pickMultiImage(
-                      limit: 9,
+                      // limit: 9,
                       imageQuality: 100,
                     );
                     if (pickedFiles.isNotEmpty) {

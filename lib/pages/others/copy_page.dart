@@ -26,7 +26,8 @@ class CopyPage extends StatelessWidget {
       child: SafeArea(
         child: Stack(
           children: [
-            if (!Platform.isAndroid && !Platform.isIOS) const BackButton(),
+            if (!Platform.isAndroid && !Platform.isIOS && !Platform.isOhos)
+              const BackButton(),
             Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.symmetric(horizontal: 20),

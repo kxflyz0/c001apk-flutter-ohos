@@ -145,9 +145,11 @@ class _BlackListPageState extends State<BlackListPage> {
                       await Share.shareXFiles([
                         XFile.fromData(utf8.encode(data),
                             mimeType: 'text/plain')
-                      ], fileNameOverrides: [
-                        fileName
-                      ]);
+                        ],
+                        //     fileNameOverrides: [
+                        //   fileName
+                        // ]
+                      );
                       SmartDialog.showToast('导出成功');
                     } catch (e) {
                       SmartDialog.showToast('导出失败');

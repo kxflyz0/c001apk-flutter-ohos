@@ -38,39 +38,58 @@ dependencies:
   bcrypt: ^1.1.3
   cached_network_image: ^3.4.0
   chat_bottom_container: ^0.2.0
-  connectivity_plus: ^6.0.4
+  #  flutter_platform_utils: ^1.0.0
+  connectivity_plus:
+    path: "../flutter_packages/flutter_plus_plugins/packages/connectivity_plus/connectivity_plus/"
   crypto: ^3.0.3
-  cupertino_icons: ^1.0.8
-  device_info_plus: ^10.1.1
+  cupertino_icons:
+    path: "../flutter_packages/flutter_packages/third_party/packages/cupertino_icons/"
+  device_info_plus:
+    path: "../flutter_packages/flutter_plus_plugins/packages/device_info_plus/device_info_plus/"
   dio: ^5.5.0+1
   dynamic_color: ^1.7.0
   expandable_page_view: ^1.0.17
   extended_nested_scroll_view: ^6.2.1
-  file_picker: ^8.1.1
-  flutter_inappwebview: ^6.0.0
+  file_picker:
+    path: "../flutter_packages/fluttertpc_file_picker/"
+  flutter_inappwebview:
+    path: "../flutter_packages/flutter_inappwebview/flutter_inappwebview/"
   flutter_smart_dialog: ^4.9.7+9
-  flutter_widget_from_html_core: ^0.15.1
-  get: ^4.6.6
+  flutter_widget_from_html_core:
+    path: "../flutter_packages/flutter_widget_from_html/packages/core/"
+  get:
+    path: "../flutter_packages/mypkg/getx/"
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   html: ^0.15.4
-  image_picker: ^1.1.2
+  image_picker:
+    path: "../flutter_packages/flutter_packages/packages/image_picker/image_picker"
   indent: ^2.0.0
   intl: ^0.19.0
   json_annotation: ^4.9.0
   json_serializable: ^6.8.0
   mime: ^1.0.5
-  modal_bottom_sheet: ^3.0.0
-  package_info_plus: ^8.0.1
+  modal_bottom_sheet:
+    path: "../flutter_packages/modal_bottom_sheet/modal_bottom_sheet"
+  package_info_plus:
+    path: "../flutter_packages/flutter_plus_plugins/packages/package_info_plus/package_info_plus/"
   path_provider: ^2.1.4
-  permission_handler: ^11.3.1
+  permission_handler:
+    path: "../flutter_packages/flutter_permission_handler/permission_handler/"
   photo_view: ^0.15.0
-  saver_gallery: ^3.0.5
-  share_plus: ^10.0.0
-  url_launcher: ^6.3.0
+  gallery_saver:
+    path: "../flutter_packages/fluttertpc_gallery_saver/"
+  share_plus:
+    path: "../flutter_packages/flutter_plus_plugins/packages/share_plus/share_plus/"
+  url_launcher:
+    path: "../flutter_packages/flutter_packages/packages/url_launcher/url_launcher"
   uuid: ^4.4.2
   window_manager: ^0.4.0
   xml: ^6.5.0
+
+dependency_overrides:
+  path_provider:
+    path: "../flutter_packages/flutter_packages/packages/path_provider/path_provider"
 
 dev_dependencies:
   flutter_test:
@@ -81,18 +100,26 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  build_runner: ^2.4.12
+  build_runner: ^2.4.10
   flutter_launcher_icons: ^0.13.1
   flutter_lints: ^4.0.0
-  flutter_native_splash: ^2.4.1
+  flutter_native_splash:
+    path: "../flutter_packages/fluttertpc_flutter_native_splash/"
   hive_generator: ^2.0.1
+  pigeon:
+    path: "../flutter_packages/flutter_packages/packages/pigeon"
+#    git:
+#      url: "https://gitee.com/openharmony-sig/flutter_packages.git"
+#      path: "packages/pigeon"
 
 flutter_launcher_icons:
-  android: false
+  android: true
   ios: true
+  ohos: true
   remove_alpha_ios: true
   image_path: assets/icon/icon.png
   image_path_ios: assets/icon/icon.png
+  image_path_ohos: assets/icon/icon.png
   macos:
     generate: true
     image_path: assets/icon/icon.png
@@ -102,6 +129,7 @@ flutter_launcher_icons:
   web:
     generate: true
     image_path: assets/icon/icon.png
+
 
 flutter_native_splash:
   android_12:
