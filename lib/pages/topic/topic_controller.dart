@@ -16,7 +16,7 @@ class TopicController extends CommonController {
 
   String? title;
   String? entityType;
-  List<TabList>? tabList;
+  List<TabList> tabList = [];
   RxInt initialIndex = 0.obs;
   Rx<LoadingState> topicState = LoadingState.loading().obs;
 
@@ -40,10 +40,16 @@ class TopicController extends CommonController {
       id = data.id.toString();
       title = data.title;
       entityType = data.entityType;
-      tabList = data.tabList;
+      data.tabList?.forEach((item) {
+        tabList.add(TabList(
+          title: item.title,
+          pageName: item.pageName,
+          url: item.url,
+        ));
+      });
       String selectedTab = data.selectedTab!;
       initialIndex.value =
-          tabList!.map((item) => item.pageName).toList().indexOf(selectedTab);
+          tabList.map((item) => item.pageName).toList().indexOf(selectedTab);
 
       isBlocked = GStorage.checkTopic(title!);
       isFollow = data.userAction?.follow == 1;

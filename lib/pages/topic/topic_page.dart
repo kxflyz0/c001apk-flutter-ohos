@@ -4,8 +4,8 @@ import 'package:get/get_navigation/src/dialog/dialog_route.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../logic/state/loading_state.dart';
-import '../../pages/home/return_top_controller.dart';
 import '../../pages/feed/reply/reply_page.dart';
+import '../../pages/home/return_top_controller.dart';
 import '../../pages/topic/topic_content.dart';
 import '../../pages/topic/topic_controller.dart';
 import '../../pages/topic/topic_order_controller.dart';
@@ -59,17 +59,24 @@ class _TopicPageState extends State<TopicPage> with TickerProviderStateMixin {
         Get.put(TopicOrderController(), tag: (_tag ?? _id!) + _random);
     _topicController =
         Get.put(TopicController(tag: _tag, id: _id), tag: '$_tag$_id$_random');
-    _topicController.initialIndex.listen((initialIndex) {
-      _tabController = TabController(
-        vsync: this,
-        initialIndex: initialIndex < 0 ? 0 : initialIndex,
-        length: _topicController.tabList!.length,
-      );
-      setShouldShowActions(initialIndex);
-      _tabController?.addListener(() {
-        setShouldShowActions(_tabController!.index);
-      });
-    });
+    _topicController.initialIndex.listenAndPump(
+        (index) {
+          _tabController = TabController(
+            vsync: this,
+            initialIndex: index < 0 ? 0 : index,
+            length: _topicController.tabList.length,
+          );
+          setShouldShowActions(index);
+          _tabController?.addListener(() {
+            setShouldShowActions(_tabController!.index);
+          });
+        },
+        onDone: () {},
+        onError: (e) {
+          printError(
+              info:
+                  'topic: failed to delete topic controller: $_id because of: $e');
+        });
   }
 
   @override
@@ -170,7 +177,7 @@ class _TopicPageState extends State<TopicPage> with TickerProviderStateMixin {
                   : null,
               appBar: AppBar(
                 title: Text(
-                  _topicController.title!,
+                  _topicController.title ?? '',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -180,7 +187,7 @@ class _TopicPageState extends State<TopicPage> with TickerProviderStateMixin {
                     : TabBar(
                         controller: _tabController,
                         isScrollable: true,
-                        tabs: _topicController.tabList!
+                        tabs: _topicController.tabList
                             .map((item) => Tab(text: item.title.toString()))
                             .toList(),
                         onTap: (value) {
@@ -303,12 +310,12 @@ class _TopicPageState extends State<TopicPage> with TickerProviderStateMixin {
                     )
                   : TabBarView(
                       controller: _tabController,
-                      children: _topicController.tabList!
+                      children: _topicController.tabList
                           .map((item) => TopicContent(
                                 random: _random,
                                 tag: _topicController.tag,
                                 id: _topicController.id,
-                                index: _topicController.tabList!.indexOf(item),
+                                index: _topicController.tabList.indexOf(item),
                                 entityType: _topicController.entityType!,
                                 url: item.url.toString(),
                                 title: item.title.toString(),
